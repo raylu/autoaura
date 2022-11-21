@@ -33,7 +33,7 @@ def main():
 			while keep_going:
 				if click:
 					mouse.click(Button.left)
-					time.sleep(0.05)
+					time.sleep(0.02)
 				else:
 					time.sleep(0.2)
 	except KeyboardInterrupt:
