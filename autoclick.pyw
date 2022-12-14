@@ -5,6 +5,7 @@ import time
 import pynput.mouse
 import pynput.keyboard
 from pynput.mouse import Button
+from pynput.keyboard import Key
 import pystray
 from PIL import Image, ImageDraw
 
@@ -22,14 +23,20 @@ def main():
 	click = False
 	keep_going = True
 
-	def on_click(x, y, button, pressed):
+	def on_press(key):
 		nonlocal click
-		if button == Button.x1:
-			click = pressed
+		if key == Key.f14:
+			click = True
+		return True
+
+	def on_release(key):
+		nonlocal click
+		if key == Key.f14:
+			click = False
 		return True
 
 	try:
-		with pynput.mouse.Listener(on_click=on_click):
+		with pynput.keyboard.Listener(on_press=on_press, on_release=on_release):
 			while keep_going:
 				if click:
 					mouse.click(Button.left)
